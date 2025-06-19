@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { RadioOptionComponent } from "../../shared/components/radio-option/radio-option.component";
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ExperienceLevelComponent } from '../../shared/components/experience-level/experience-level.component';
 
 const MODULES = [
     CommonModule,
@@ -12,15 +13,16 @@ const MODULES = [
 const COMPONENTS = [
     ButtonComponent,
     RadioOptionComponent,
+    ExperienceLevelComponent,
 ]
 
 @Component({
     selector: 'app-cadastro-form',
     standalone: true,
     imports: [
-    ...MODULES,
-    ...COMPONENTS,
-],
+        ...MODULES,
+        ...COMPONENTS,
+    ],
     templateUrl: './cadastro-form.component.html',
     styleUrls: ['./cadastro-form.component.scss']
 })
@@ -67,7 +69,15 @@ export class CadastroFormComponent implements OnInit {
         this.cadastroForm.get('areasAtuacao')?.setValue(area);
     }
 
-    onProximo(){
-        
+    onNivelChange(nivel: string) {
+        this.cadastroForm.get('nivelExperiencia')?.setValue(nivel);
     }
+
+    onProximo() {
+        if (this.cadastroForm.valid) {
+            console.log('Formulário válido!');
+        }
+    }
+
+    onAnterior(){}
 }
